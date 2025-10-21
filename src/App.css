@@ -31,22 +31,14 @@ img {
 }
 
 .search {
-  display: flex;
-  align-items: center;
-  gap: 15px;
   height: 40px;
-  background-color: white;
+  background-color: #D9D9D9;
   width: 350px;
   border-radius: 20px;
   padding-left: 10px;
 }
 
-.search img {
-  height: 35px;
-  width: 35px;
-}
-
-.search p {
+.search::placeholder {
   color: #454545;
   font-size: 22px;
 }

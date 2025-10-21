@@ -40,19 +40,21 @@ const Message = (props: MessageProps) => {
   );
 }
 
-const Search = () => {
-  const [inputValue, setInputValue] = useState<string>("");
+type SearchProps = {
+  mutateValue: () => void
+}
 
-  const handleInput = (event: React.FormEventHandler<HTMLDivElement>) => {
-    setInputValue(event.target.value)
-  }
+const [inputValue, setInputValue] = useState<string>("");
+
+const Search = (props: SearchProps) => {
+
+  //const handleInput = (event: React.FormEventHandler<HTMLDivElement>) => {
+  //  setInputValue(event.target.value)
+  //}
 
   return (
     <div className="search-contanier">
-      <div className="search">
-        <img src="src\assets\Search.svg" alt=""/>
-        <p>Поиск</p>
-      </div>
+      <input className="search" placeholder='Поиск' onChange={(e) =>props.mutateValue(e.target.value)}/>
     </div>
   );
 }
@@ -60,7 +62,7 @@ const Search = () => {
 const Nav = () => {
   return (
     <div className="nav">
-      <Search/>
+      <Search mutateValue={setInputValue}/>
       <div className="dialogsWrapper">
         {dialogs.map((el) => <Dialog name={el.name}/>)}
       </div>
@@ -89,7 +91,7 @@ function App() {
             </div>
             <div className="chat-bottom">
                 <input className="user-input-field" placeholder="Сообщение"/>
-                <button className="send button"></button>
+                <button className="send button"><img src="src\assets\Email Send.svg" alt="" /></button>
                 <div className="button">
                     <img className="" src="src\assets\Microphone.svg" alt=""/>
                 </div>
