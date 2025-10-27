@@ -3,7 +3,7 @@ import './App.css'
 
 // сделать список с объектами диалогов
 // сделать список с объектами сообщений
-const messages = [{id: '40e2af48-4559-44c2-b964-ac3c2542e278', text: 'hello', time: '10:30'}, {id: 'grhtrnty', text: 'hi', time: '10:32'}]
+const messages = [{id: '40e2af48-4559-44c2-b964-ac3c2542e278', text: 'bye', time: '10:30'}, {id: 'grhtrnty', text: 'hi', time: '10:32'}]
 const dialogs = [{id: '3a49968e-be78-4593-8440-8f60d168a8f2', name: 'Чувак'}, {id: '3a49968e-be78-4593-8440-8f60d168a8f2', name: 'Чувак'}]
 
 type DialogProps = {
