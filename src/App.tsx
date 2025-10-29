@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import './App.css'
+import { useMessage } from './stores'
+import { useShallow } from 'zustand/react/shallow'
 
-const messages = [{id: '40e2af48-4559-44c2-b964-ac3c2542e278', text: 'bye ', time: '10:30'}, {id: 'grhtrnty', text: 'hi', time: '10:32'}]
 const dialogs = [{id: '3a49968e-be78-4593-8440-8f60d168a8f2', name: 'Чувак'}, {id: '3a49968e-be78-4593-8440-8f60d168a8f2', name: 'Чувак'}]
 
 type DialogProps = {
@@ -39,6 +40,22 @@ type SearchProps = {
   mutateValue: React.Dispatch<React.SetStateAction<string>>
 }
 
+
+const Messages = () => {
+  const {messages, addMessage} = useMessage(useShallow(state => ({
+    messages: state.messages,
+    addMessage: state.addMessage
+  })))
+
+  const [message, setMessage] = useState('')
+
+  return (
+    <div>
+      {messages.map(message => <Message {...message}/>)}
+    </div>
+  );
+}
+
 type MessageInputProps = {
   mutateValue: React.Dispatch<React.SetStateAction<string>>
 }
@@ -58,11 +75,9 @@ const Search = (props: SearchProps) => {
 }
 
 const ChatBottom = () => {
-  const [messageValue, setMessageValue] = useState<string>("")
-
   return (
     <div className="chat-bottom">
-      <MessageInput mutateValue={setMessageValue}/>
+      <MessageInput/>
       <button className="send button"><img src="src\assets\Email Send.svg" alt=""/></button>
       <div className="button">
         <img className="" src="src\assets\Microphone.svg" alt=""/>
@@ -101,7 +116,7 @@ function App() {
             </div>
             <div className="content">
                 <div className="filler"></div>
-                {messages.map((el) => <Message {...el}/>)}
+                <Messages/>
             </div>
             <ChatBottom/>
         </div>
