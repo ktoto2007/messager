@@ -12,7 +12,7 @@ interface MessagesStore {
 }
 
 export const useMessage = create<MessagesStore>((set) => ({
-    messages: [],
+    messages: [{id: '3rf,iweik', text: 'hi', time: '10:30'}],
     addMessage: (newMessage) => {
         set(
             state=>({...state, messages: [...state.messages, newMessage]})
