@@ -16,7 +16,7 @@ img {
   overflow-y: scroll;
   scrollbar-width: none;
   height: 100vh;
-  width: 450px;
+  width: 350px;
   background-color: #313131;
   display: flex;
   flex-direction: column;
@@ -37,6 +37,8 @@ img {
   border-radius: 20px;
   border-width: 0;
   padding-left: 10px;
+  color: #454545;
+  font-size: 22px;
 }
 
 .search::placeholder {
@@ -69,7 +71,7 @@ img {
 
 .chat-contanier {
   height: 100vh;
-  width: calc(100vw - 450px);
+  width: calc(100vw - 350px);
   background-color: #1e1e1e;
 }
 
@@ -126,6 +128,7 @@ img {
   border-radius: 20px;
   width: fit-content;
   max-width: 400px;
+  margin-top: 10px;
   padding: 7px;
   border-bottom-left-radius: 1px;
 }
@@ -152,7 +155,7 @@ img {
   justify-content: center;
   align-items: center;
   height: 100px;
-  width: calc(100vw - 450px);
+  width: calc(100vw - 350px);
 }
 
 .user-input-field {
@@ -163,6 +166,7 @@ img {
   height: 55px;
   padding-left: 25px;
   font-size: 25px;
+  color: #454545;
 }
 
 .user-input-field::placeholder {

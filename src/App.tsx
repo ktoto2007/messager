@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import './App.css'
 import { useMessage, type MessageType } from './stores'
 import { useShallow } from 'zustand/react/shallow'
@@ -37,12 +37,9 @@ const Message = (props: MessageProps) => {
 }
 
 const Messages = () => {
-  const {messages, addMessage} = useMessage(useShallow(state => ({
+  const {messages} = useMessage(useShallow(state => ({
     messages: state.messages,
-    addMessage: state.addMessage
   })))
-
-  const [message, setMessage] = useState('')
 
   return (
     <div>
@@ -51,22 +48,18 @@ const Messages = () => {
   );
 }
 
-type MessageInputProps = {
-  mutateValue: React.Dispatch<React.SetStateAction<string>>
-}
-
-const MessageInput = (props: MessageInputProps) => {
-  return (
-    <input className="user-input-field" placeholder="Сообщение" onChange={(e)=>props.mutateValue(e.target.value)}/>
-  );
-}
-
 const ChatBottom = () => {
+  const {addMessage} = useMessage(useShallow(state => ({
+    addMessage: state.addMessage
+  })))
+
+  const [message, setMessage] = useState('')
+
   return (
     <div className="chat-bottom">
-      <input className="user-input-field" placeholder="Сообщение" onChange={(e)=>setMessage(e.target.value)}/>
+      <input value={message} className="user-input-field" placeholder="Сообщение" onChange={(e)=>setMessage(e.target.value)}/>
       <button onClick={e=> {
-        addMessage({id: 'ei21094', text: message, time: '10:00'})
+        addMessage({id: 'ei21094', text: message, time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })})
         setMessage("")
       }} className="send button"><img src="src\assets\Email Send.svg" alt=""/></button>
       <div className="button">
@@ -104,24 +97,24 @@ const Search = (props: SearchProps) => {
 function App() {
   return (
     <div className="contanier">
-        <Nav/>
-        <div className="chat-contanier">
-          <div className="chat-header">
-            <div className="header-left">
-              <img className="chat-profile" src="src\assets\Profile.svg" alt=""/>
-              <div className="name-and-activity">
-                <p className="name-header">Чувак</p>
-                <p className="activity">В сети</p>
-              </div>
+      <Nav/>
+      <div className="chat-contanier">
+        <div className="chat-header">
+          <div className="header-left">
+            <img className="chat-profile" src="src\assets\Profile.svg" alt=""/>
+            <div className="name-and-activity">
+              <p className="name-header">Чувак</p>
+              <p className="activity">В сети</p>
             </div>
-            <img className="parameters" src="src\assets\Ellipsis.svg" alt=""/>
           </div>
-          <div className="content">
-            <div className="filler"></div>
-            <Messages/>
-          </div>
-          <ChatBottom/>
+          <img className="parameters" src="src\assets\Ellipsis.svg" alt=""/>
         </div>
+        <div className="content">
+          <div className="filler"></div>
+          <Messages/>
+        </div>
+        <ChatBottom/>
+      </div>
     </div>
   )
 }
