@@ -1,20 +1,21 @@
 import { createContext, useContext, useState } from 'react'
 import './App.css'
-import { useMessage, type MessageType } from './stores'
+import { useChat, useMessage, type MessageType } from './stores'
 import { useShallow } from 'zustand/react/shallow'
 
-const dialogs = [{id: '3a49968e-be78-4593-8440-8f60d168a8f2', name: 'Чувак'}, {id: '3a49968e-be78-4593-8440-8f60d168a8f2', name: 'Чувак'}]
-
-type DialogProps = {
+type ChatProps = {
   id: string
   name: string
+  time: string
+  src: string
 }
 
-const Dialog = (props: DialogProps) => {
+const Chat = (props: ChatProps) => {
   return (
     <div className="chat-nav">
-      <img src="src\assets\Profile.svg" alt=""/>
+      <img src={props.src} alt=""/>
       <p className="name-nav">{props.name}</p>
+      <div className='chat-time'>{props.time}</div>
     </div>
   );
 }
@@ -29,7 +30,7 @@ const Message = (props: MessageProps) => {
   return (
     <div className="message">
       {props.text}
-      <div className='time'>
+      <div className='message-time'>
         {props.time}
       </div>
     </div>
@@ -72,11 +73,15 @@ const ChatBottom = () => {
 const Nav = () => {
   const [searchValue, setSearchValue] = useState<string>("");
 
+  const {chats} = useChat(useShallow(state => ({
+    chats: state.chats
+  })))
+
   return (
     <div className="nav">
       <Search mutateValue={setSearchValue}/>
       <div className="dialogsWrapper">
-        {dialogs.map((el) => <Dialog {...el}/>)}
+        {chats.map((el) => <Chat {...el}/>)}
       </div>
     </div>
   );
