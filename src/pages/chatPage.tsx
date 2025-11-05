@@ -1,6 +1,6 @@
-import { createContext, useContext, useState } from 'react'
-import './App.css'
-import { useChat, useMessage, type MessageType } from './stores'
+import {useState } from 'react'
+import '../App.css'
+import { useChat, useMessage} from '../stores'
 import { useShallow } from 'zustand/react/shallow'
 
 type ChatProps = {
@@ -76,12 +76,12 @@ const Nav = () => {
   const {chats} = useChat(useShallow(state => ({
     chats: state.chats
   })))
-
+  console.log(chats)
   return (
     <div className="nav">
       <Search mutateValue={setSearchValue}/>
       <div className="dialogsWrapper">
-        {chats.map((el) => <Chat {...el}/>)}
+        {chats.map((el) => <Chat key={el.id} {...el}/>)}
       </div>
     </div>
   );
@@ -99,7 +99,7 @@ const Search = (props: SearchProps) => {
   );
 }
 
-function App() {
+export function ChatPage() {
   return (
     <div className="contanier">
       <Nav/>
@@ -123,6 +123,3 @@ function App() {
     </div>
   )
 }
-
-
-export default App
