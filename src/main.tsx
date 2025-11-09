@@ -6,7 +6,6 @@ import { ChatPage } from './pages/chatPage.tsx'
 import { LoginPage } from './pages/loginPage/loginPage.tsx'
 import { RegistrationPage } from './pages/registrationPage/registrationPage.tsx'
 
-
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <Routes>
