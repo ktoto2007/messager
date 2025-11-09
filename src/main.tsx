@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
-import {BrowserRouter, Routes, Route} from "react-router"
+import './App.css'
+import {BrowserRouter, Routes, Route} from "react-router-dom"
 import { ChatPage } from './pages/chatPage.tsx'
 import { LoginPage } from './pages/loginPage/loginPage.tsx'
 import { RegistrationPage } from './pages/registrationPage/registrationPage.tsx'

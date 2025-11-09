@@ -93,7 +93,7 @@ type SearchProps = {
 
 const Search = (props: SearchProps) => {
   return (
-    <div className="search-contanier">
+    <div className="search-container">
       <input className="search" placeholder='Поиск' onChange={(e)=>props.mutateValue(e.target.value)}/>
     </div>
   );
@@ -101,9 +101,9 @@ const Search = (props: SearchProps) => {
 
 export function ChatPage() {
   return (
-    <div className="contanier">
+    <div className="container">
       <Nav/>
-      <div className="chat-contanier">
+      <div className="chat-container">
         <div className="chat-header">
           <div className="header-left">
             <img className="chat-profile" src="src\assets\Profile.svg" alt=""/>
