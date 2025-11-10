@@ -119,7 +119,7 @@ export function ChatPage() {
           <div className="header-left">
             <img className="chat-profile" src="src\assets\Profile.svg" alt=""/>
             <div className="name-and-activity">
-              <p className="name-header">{}</p>
+              <p className="name-header">чувак</p>
               <p className="activity">В сети</p>
             </div>
           </div>
