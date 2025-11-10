@@ -11,8 +11,13 @@ type ChatProps = {
 }
 
 const Chat = (props: ChatProps) => {
+  const {setCurrentChatId, currentChatId} = useMessage(useShallow(state => ({
+    setCurrentChatId: state.setCurrentChatId,
+    currentChatId: state.currentChatId
+  })))
+  console.log(currentChatId)
   return (
-    <div className="chat-nav">
+    <div onClick={e => setCurrentChatId(props.id)} className="chat-nav">
       <img src={props.src} alt=""/>
       <p className="name-nav">{props.name}</p>
       <div className='chat-time'>{props.time}</div>
@@ -38,20 +43,22 @@ const Message = (props: MessageProps) => {
 }
 
 const Messages = () => {
-  const {messages} = useMessage(useShallow(state => ({
+  const {messages, currentChatId} = useMessage(useShallow(state => ({
     messages: state.messages,
+    currentChatId: state.currentChatId
   })))
 
   return (
     <div>
-      {messages.map(message => <Message {...message}/>)}
+      {messages.filter(message => message.chatId === currentChatId).map(message => <Message {...message}/>)}
     </div>
   );
 }
 
 const ChatBottom = () => {
-  const {addMessage} = useMessage(useShallow(state => ({
-    addMessage: state.addMessage
+  const {addMessage, currentChatId} = useMessage(useShallow(state => ({
+    addMessage: state.addMessage,
+    currentChatId: state.currentChatId
   })))
 
   const [message, setMessage] = useState('')
@@ -60,7 +67,7 @@ const ChatBottom = () => {
     <div className="chat-bottom">
       <input value={message} className="user-input-field" placeholder="Сообщение" onChange={(e)=>setMessage(e.target.value)}/>
       <button onClick={e=> {
-        addMessage({id: 'ei21094', text: message, time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })})
+        addMessage({id: crypto.randomUUID(), sender_id: 'eruifj', chatId: currentChatId, text: message, time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })})
         setMessage("")
       }} className="send button"><img src="src\assets\Email Send.svg" alt=""/></button>
       <div className="button">
@@ -100,6 +107,10 @@ const Search = (props: SearchProps) => {
 }
 
 export function ChatPage() {
+  const {currentChatId} = useMessage(useShallow(state => ({
+    currentChatId: state.currentChatId
+  })))
+
   return (
     <div className="container">
       <Nav/>
@@ -108,7 +119,7 @@ export function ChatPage() {
           <div className="header-left">
             <img className="chat-profile" src="src\assets\Profile.svg" alt=""/>
             <div className="name-and-activity">
-              <p className="name-header">Чувак</p>
+              <p className="name-header">{}</p>
               <p className="activity">В сети</p>
             </div>
           </div>

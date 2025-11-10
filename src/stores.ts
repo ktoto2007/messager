@@ -1,21 +1,31 @@
 import {create} from 'zustand'
 
 export type MessageType = {
-    id: string,
+    id: string
+    sender_id: string,
+    chatId: string,
     text: string,
     time: string,
 }
 
 interface MessagesStore {
     messages: MessageType[]
+    currentChatId: string
     addMessage: (newMessage: MessageType) => void
+    setCurrentChatId: (chatId: string) => void
 }
 
 export const useMessage = create<MessagesStore>((set) => ({
     messages: [],
+    currentChatId: '',
     addMessage: (newMessage) => {
         set(
             state=>({...state, messages: [...state.messages, newMessage]})
+        )
+    },
+    setCurrentChatId: (chatId) => {
+        set(
+            state=>({...state, currentChatId: chatId})
         )
     }
 }))
@@ -23,8 +33,8 @@ export const useMessage = create<MessagesStore>((set) => ({
 type ChatType = {
     id: string,
     name: string,
-    time: string
-    src: string
+    time: string,
+    src: string,
 }
 
 interface ChatsStore {
