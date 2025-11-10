@@ -52,4 +52,6 @@
     color: #ffffff;
     opacity: 31%;
     background-color: #1E1E1E;
+    border-radius: 15px;
+    border-width: 0;
 }

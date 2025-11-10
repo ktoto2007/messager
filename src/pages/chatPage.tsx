@@ -76,7 +76,7 @@ const Nav = () => {
   const {chats} = useChat(useShallow(state => ({
     chats: state.chats
   })))
-  console.log(chats)
+  
   return (
     <div className="nav">
       <Search mutateValue={setSearchValue}/>
