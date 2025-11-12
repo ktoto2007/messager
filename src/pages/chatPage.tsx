@@ -111,6 +111,12 @@ export function ChatPage() {
     currentChatId: state.currentChatId
   })))
 
+  const {chats} = useChat(useShallow(state => ({
+    chats: state.chats
+  })))
+
+  const currentChat = chats.find((chat) => chat.id === currentChatId)
+
   return (
     <div className="container">
       <Nav/>
@@ -119,7 +125,7 @@ export function ChatPage() {
           <div className="header-left">
             <img className="chat-profile" src="src\assets\Profile.svg" alt=""/>
             <div className="name-and-activity">
-              <p className="name-header">чувак</p>
+              <p className="name-header">{currentChat?.name}</p>
               <p className="activity">В сети</p>
             </div>
           </div>
